@@ -2,18 +2,21 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>learning | Hexo</title>
+  <title>learning | WuMing</title>
   <meta name="keywords" content>
-  <meta name="description" content="learning | Hexo">
+  <meta name="description" content="learning | WuMing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="https://zhongshanhao.github.io/about/index.html">
+<meta property="og:site_name" content="WuMing">
+<meta property="og:description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-02T02:51:42.127Z">
+<meta property="og:updated_time" content="2019-10-02T06:15:00.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
+<meta name="twitter:title" content="关于">
+<meta name="twitter:description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 
 
 <link rel="icon" href="/img/touxiang.jpg">
@@ -55,7 +58,7 @@
     <img class="avatar" src="/img/touxiang.jpg" />
 </a>
 <div class="author">
-    <span>John Doe</span>
+    <span>WuMing</span>
 </div>
 
 <div class="icon">
@@ -128,9 +131,21 @@
     
         
             
-            <li><div data-rel="机器学习">机器学习<small>(1)</small></div>
+            <li><div data-rel="机器学习"><i class="fold iconfont icon-right"></i>机器学习<small>(1)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="图像识别">图像识别<small>(0)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
                 
             </li>
+            
+        
+    
+        
             
         
     
@@ -330,18 +345,14 @@
 </article>
 
 
-<p>
-    <a href="javascript:void(0)" class="dashang" onclick="dashangToggle()">赏</a>
-</p>
-
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>learning</p>
     <p><span class="copy-title">文章字数:</span><span class="post-count">9</span></p>
-    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
     <p><span class="copy-title">发布时间:</span>2019-09-30, 22:25:13</p>
     <p><span class="copy-title">最后更新:</span>2019-10-02, 11:41:55</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/30/test-my-site/" title="learning">http://yoursite.com/2019/09/30/test-my-site/</a>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/30/test-my-site/" title="learning">https://zhongshanhao.github.io/2019/09/30/test-my-site/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
@@ -396,24 +407,6 @@
 </div>
 <div class="acParent"></div>
 
-<div class="hide_box" onclick="dashangToggle()"></div>
-<div class="shang_box">
-    <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
-    <div class="shang_tit">
-        <p>喜欢就点赞,疼爱就打赏</p>
-    </div>
-    <div class="shang_payimg">
-        <div class="pay_img">
-            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
-            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
-        </div>
-    </div>
-    <div class="shang_payselect">
-        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
-    </div>
-</div>
-
-
 </body>
 <script src="/js/jquery.pjax.js?v=1.0.1" ></script>
 
@@ -435,14 +428,6 @@
         
 
         /*渲染打赏样式*/
-        
-        $("input[name=pay]").on("click", function () {
-            if($("input[name=pay]:checked").val()=="weixin"){
-                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
-            } else {
-                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
-            }
-        })
         
 
         /*高亮代码块行号*/
@@ -474,11 +459,6 @@
     }
 
     /*打赏页面隐藏与展示*/
-    
-    function dashangToggle() {
-        $(".shang_box").fadeToggle();
-        $(".hide_box").fadeToggle();
-    }
     
 
 </script>
@@ -614,25 +594,6 @@
     
 
     /*文章列表背景图*/
-    
-    .nav-right:before {
-        content: ' ';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.3;
-        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
-        background-repeat: no-repeat;
-        background-position: 50% 0;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        -moz-background-size: cover;
-        -webkit-background-size: cover;
-        background-size: cover;
-    }
     
 
     

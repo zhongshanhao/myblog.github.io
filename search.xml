@@ -4,12 +4,18 @@
   
     
     <entry>
-      <title>test</title>
-      <link href="/2019/10/02/test/"/>
-      <url>/2019/10/02/test/</url>
+      <title>写在博客之前</title>
+      <link href="/2019/10/02/whyblog/"/>
+      <url>/2019/10/02/whyblog/</url>
       
-        <content type="html"><![CDATA[<h1 id="评论功能测试"><a href="#评论功能测试" class="headerlink" title="评论功能测试"></a>评论功能测试</h1>]]></content>
+        <content type="html"><![CDATA[<h1 id="写在博客之前"><a href="#写在博客之前" class="headerlink" title="写在博客之前"></a>写在博客之前</h1><h2 id="Why-Blog？"><a href="#Why-Blog？" class="headerlink" title="Why Blog？"></a>Why Blog？</h2><blockquote><p>记录日常学习笔记。</p><p>方便快速复习已经学过的知识。</p><p>增加写文能力。</p><p>希望能帮助到其他人。</p></blockquote><h2 id="工匠精神"><a href="#工匠精神" class="headerlink" title="工匠精神"></a>工匠精神</h2><p>当今社会，经济和技术高速发展，身处于这样一个时代的我们难免有些浮躁。我所推崇的”工匠精神“，是一种刻骨钻研、追求创新的精神。我所希望的是，任何一种职业，不管在学习还是工作中，都应该像一名工匠一样，尽自己所能把事情做好，做精。</p>]]></content>
       
+      
+      <categories>
+          
+          <category> 杂谈 </category>
+          
+      </categories>
       
       
         <tags>
@@ -23,71 +29,19 @@
     
     
     <entry>
-      <title>b</title>
-      <link href="/2019/10/02/b/"/>
-      <url>/2019/10/02/b/</url>
+      <title>test</title>
+      <link href="/2019/10/02/test/"/>
+      <url>/2019/10/02/test/</url>
       
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>t</title>
-      <link href="/2019/10/02/t/"/>
-      <url>/2019/10/02/t/</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="评论功能测试"><a href="#评论功能测试" class="headerlink" title="评论功能测试"></a>评论功能测试</h1>]]></content>
       
       
       
-    </entry>
-    
-    
-    
-    <entry>
-      <title>test_my_site</title>
-      <link href="/2019/10/02/test-my-site-1/"/>
-      <url>/2019/10/02/test-my-site-1/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>learning</title>
-      <link href="/2019/09/30/test-my-site/"/>
-      <url>/2019/09/30/test-my-site/</url>
-      
-        <content type="html"><![CDATA[<h1 id="what-the-hell-is-that？"><a href="#what-the-hell-is-that？" class="headerlink" title="what the hell is that？"></a>what the hell is that？</h1><h2 id="I-really-want-you！"><a href="#I-really-want-you！" class="headerlink" title="I really want you！"></a>I really want you！</h2>]]></content>
-      
-      
-      <categories>
-          
-          <category> 机器学习 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2019/09/30/hello-world/"/>
-      <url>/2019/09/30/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
+        <tags>
+            
+            <tag> 其他 </tag>
+            
+        </tags>
       
     </entry>
     
