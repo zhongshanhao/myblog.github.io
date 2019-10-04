@@ -280,7 +280,7 @@
     </div>
     <div class="article-meta">
         
-        <span>字数:368</span>
+        <span>字数:373</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -327,38 +327,36 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>和python列表一样，numpy库中array也有着可切片的特性，这大大方便了我们对矩阵的可操作性。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">12</span>)</span><br><span class="line">a.shape = (<span class="number">3</span>,<span class="number">4</span>)   <span class="comment">#同写法a = a.reshape(3,4)</span></span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import numpy as np
 
+a = np.arange(12)
+a.shape = (3,4)   #同写法a = a.reshape(3,4)
+print(a)</code></pre>
 <p>首先我们现创建一个3*4的矩阵，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[ 0  1  2  3]</span><br><span class="line"> [ 4  5  6  7]</span><br><span class="line"> [ 8  9 10 11]]</span><br></pre></td></tr></table></figure>
-
-<p>可通过a[x,y]选择第x+1行第y+1列的元素</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a[<span class="number">2</span>,<span class="number">3</span>]) <span class="comment">#选择矩阵第3行第4列</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11</span><br></pre></td></tr></table></figure>
-
-<p>通过以下方法可对矩阵进行切割。</p>
+<pre><code>[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]</code></pre><p>可通过a[x,y]选择第x+1行第y+1列的元素</p>
+<pre><code class="python">print(a[2,3]) #选择矩阵第3行第4列</code></pre>
+<pre><code>11</code></pre><p>通过以下方法可对矩阵进行切割。</p>
 <p>a[:,y]中“：”表示选择所有行，y表示选择第y+1列，a[:,1]表示选择矩阵a第2列的所有行，也就是[1 5 9]；</p>
 <p>a[1,:]表示选择矩阵a第2行的所有列，也就是[4 5 6 7]。</p>
 <p>a[:,:2]表示选择矩阵a第1和第2列的所有行。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(a[:,<span class="number">1</span>])  <span class="comment">#选择矩阵第二列 </span></span><br><span class="line">print(a[<span class="number">1</span>,:])  <span class="comment">#选择矩阵第二行  </span></span><br><span class="line">print(a[:,:<span class="number">2</span>]) <span class="comment">#选择矩阵第一和第二列</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1 5 9]</span><br><span class="line">[4 5 6 7]</span><br><span class="line">[[0 1]</span><br><span class="line"> [4 5]</span><br><span class="line"> [8 9]]</span><br></pre></td></tr></table></figure>
-
-<p>选择矩阵第2，3行和第2，3列</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a[1:,1:3])</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[ 5  6]</span><br><span class="line"> [ 9 10]]</span><br></pre></td></tr></table></figure>
-
-<p>用ravel()方法可将矩阵按行展开</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a.ravel())<span class="comment">#将矩阵转换成列表</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ 0  1  2  3  4  5  6  7  8  9 10 11]</span><br></pre></td></tr></table></figure>
-
-<p>方法np.where(condition,x1,x2)，矩阵元素满足condition则选择用x1替换，否则用x2替换</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="string">'one'</span>,<span class="string">'zreo'</span>,<span class="string">'one'</span>])</span><br><span class="line">y = np.where(y == <span class="string">'one'</span>,<span class="number">1</span>,<span class="number">0</span>) <span class="comment">#满足条件选1，不满足选0</span></span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1 0 1]</span><br></pre></td></tr></table></figure>
+<pre><code class="python">print(a[:,1])  #选择矩阵第二列 
+print(a[1,:])  #选择矩阵第二行  
+print(a[:,:2]) #选择矩阵第一和第二列</code></pre>
+<pre><code>[1 5 9]
+[4 5 6 7]
+[[0 1]
+ [4 5]
+ [8 9]]</code></pre><p>选择矩阵第2，3行和第2，3列</p>
+<pre><code>print(a[1:,1:3]) </code></pre><pre><code>[[ 5  6]
+ [ 9 10]]</code></pre><p>用ravel()方法可将矩阵按行展开</p>
+<pre><code class="python">print(a.ravel())#将矩阵转换成列表</code></pre>
+<pre><code>[ 0  1  2  3  4  5  6  7  8  9 10 11]</code></pre><p>方法np.where(condition,x1,x2)，矩阵元素满足condition则选择用x1替换，否则用x2替换</p>
+<pre><code class="python">y = np.array([&#39;one&#39;,&#39;zreo&#39;,&#39;one&#39;])
+y = np.where(y == &#39;one&#39;,1,0) #满足条件选1，不满足选0
+print(y)</code></pre>
+<pre><code>[1 0 1]</code></pre>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 572108581@qq.com </span>
     </div>
@@ -368,7 +366,7 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>numpy_矩阵切片</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">368</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">373</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
     <p><span class="copy-title">发布时间:</span>2019-10-03, 15:55:37</p>
     <p><span class="copy-title">最后更新:</span>2019-10-03, 17:19:48</p>
