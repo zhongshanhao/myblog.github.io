@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>python机器学习--感知机 | WuMing</title>
+  <meta name="keywords" content>
+  <meta name="description" content="python机器学习--感知机 | WuMing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于">
+<meta property="og:url" content="https://zhongshanhao.github.io/about/index.html">
+<meta property="og:site_name" content="WuMing">
+<meta property="og:description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-10-02T06:15:00.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于">
+<meta name="twitter:description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
+
+
+<link rel="icon" href="/img/touxiang.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/github.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/touxiang.jpg" />
+</a>
+<div class="author">
+    <span>WuMing</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/zhongshanhao" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=572108581&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(3)</small></div></li>
+    
+        
+            
+            <li><div data-rel="机器学习">机器学习<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="numpy">numpy<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="杂谈">杂谈<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="3">
+<input type="hidden" id="yelog_site_word_count" value="1.1k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="以 in: 开头进行全文搜索" autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">numpy</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a href="javascript:" class="color3">其他</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        <a id="top" class="杂谈 "
+           href="/2019/10/02/whyblog/"
+           data-tag="其他"
+           data-author="" >
+            <span class="post-title" title="写在博客之前">写在博客之前</span>
+            <span class="post-date" title="2019-10-02 15:51:27">2019/10/02</span>
+        </a>
+        
+        <a  class="机器学习 "
+           href="/2019/10/03/ganzhiji/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="python机器学习--感知机">python机器学习--感知机</span>
+            <span class="post-date" title="2019-10-03 16:56:21">2019/10/03</span>
+        </a>
+        
+        <a  class="numpy "
+           href="/2019/10/03/numpy-array/"
+           data-tag="numpy"
+           data-author="" >
+            <span class="post-title" title="numpy_矩阵切片">numpy_矩阵切片</span>
+            <span class="post-date" title="2019-10-03 15:55:37">2019/10/03</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-ganzhiji" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">python机器学习--感知机</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="机器学习">机器学习</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-10-03 17:15:42'>2019-10-03 16:56</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:542</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from matplotlib.colors import ListedColormap</span><br><span class="line"></span><br><span class="line">class Perceptron(object):</span><br><span class="line">    def __init__(self, eta=0.01, n_iter=50, random_state=1):        </span><br><span class="line">        self.eta = eta        </span><br><span class="line">        self.n_iter = n_iter        </span><br><span class="line">        self.random_state = random_state</span><br><span class="line">    </span><br><span class="line">    def fit(self, X, y):</span><br><span class="line">        rgen = np.random.RandomState(self.random_state)        </span><br><span class="line">        self.w_ = rgen.normal(loc=0.0, scale=0.01,size=1 + X.shape[1])        </span><br><span class="line">        self.errors_ = []</span><br><span class="line">        for _ in range(self.n_iter):            </span><br><span class="line">            errors = 0            </span><br><span class="line">            for xi, target in zip(X, y):                </span><br><span class="line">                update = self.eta * (target - self.predict(xi))                </span><br><span class="line">                self.w_[1:] += update * xi                </span><br><span class="line">                self.w_[0] += update                </span><br><span class="line">                errors += int(update != 0.0)            </span><br><span class="line">            self.errors_.append(errors)        </span><br><span class="line">        return self</span><br><span class="line">    </span><br><span class="line">    def net_input(self, X):        </span><br><span class="line">        &quot;&quot;&quot;Calculate net input&quot;&quot;&quot;        </span><br><span class="line">        return np.dot(X, self.w_[1:]) + self.w_[0]</span><br><span class="line">    </span><br><span class="line">    def predict(self, X):        </span><br><span class="line">        &quot;&quot;&quot;Return class label after unit step&quot;&quot;&quot;        </span><br><span class="line">        return np.where(self.net_input(X) &gt;= 0.0, 1, -1)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">'https://archive.ics.uci.edu/ml/'</span> </span><br><span class="line"><span class="meta">... </span>             <span class="string">'machine-learning-databases/iris/iris.data'</span>, </span><br><span class="line"><span class="meta">... </span>              header=<span class="literal">None</span>) </span><br><span class="line">df.tail()</span><br></pre></td></tr></table></figure>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.dataframe tbody tr th &#123;</span><br><span class="line">    vertical-align: top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.dataframe thead th &#123;</span><br><span class="line">    text-align: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>Iris-virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>Iris-virginica</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment"># select setosa and versicolor </span></span><br><span class="line">y = df.iloc[<span class="number">0</span>:<span class="number">100</span>, <span class="number">4</span>].values </span><br><span class="line">y = np.where(y == <span class="string">'Iris-setosa'</span>, <span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># extract sepal length and petal length </span></span><br><span class="line">X = df.iloc[<span class="number">0</span>:<span class="number">100</span>, [<span class="number">0</span>, <span class="number">2</span>]].values</span><br><span class="line"><span class="comment"># plot data </span></span><br><span class="line">plt.scatter(X[:<span class="number">50</span>, <span class="number">0</span>], X[:<span class="number">50</span>, <span class="number">1</span>], label=<span class="string">'setosa'</span>) </span><br><span class="line">plt.scatter(X[<span class="number">50</span>:<span class="number">100</span>, <span class="number">0</span>], X[<span class="number">50</span>:<span class="number">100</span>, <span class="number">1</span>],marker=<span class="string">'x'</span>,label=<span class="string">'versicolor'</span>)  </span><br><span class="line">plt.xlabel(<span class="string">'sepal length [cm]'</span>) </span><br><span class="line">plt.ylabel(<span class="string">'petal length [cm]'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper left'</span>) </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i2.tiimg.com/700703/d147555495de8c6b.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ppn = Perceptron(eta=<span class="number">0.1</span>,n_iter=<span class="number">10</span>)</span><br><span class="line">ppn.fit(X, y)</span><br><span class="line">plt.plot(range(<span class="number">1</span>, len(ppn.errors_) + <span class="number">1</span>), ppn.errors_, marker=<span class="string">'o'</span>) </span><br><span class="line">plt.xlabel(<span class="string">'Epochs'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Number of updates'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i2.tiimg.com/700703/0f0a93745808decc.png" alt="Markdown"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_decision_regions</span><span class="params">(X, y, classifier, resolution=<span class="number">0.02</span>)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># setup marker generator and color map    </span></span><br><span class="line">    markers = (<span class="string">'s'</span>, <span class="string">'x'</span>, <span class="string">'o'</span>, <span class="string">'^'</span>, <span class="string">'v'</span>)    </span><br><span class="line">    colors = (<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'lightgreen'</span>, <span class="string">'gray'</span>, <span class="string">'cyan'</span>)    </span><br><span class="line">    cmap = ListedColormap(colors[:len(np.unique(y))])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># plot the decision surface    </span></span><br><span class="line">    x1_min, x1_max = X[:, <span class="number">0</span>].min() - <span class="number">1</span>, X[:, <span class="number">0</span>].max() + <span class="number">1</span>    </span><br><span class="line">    x2_min, x2_max = X[:, <span class="number">1</span>].min() - <span class="number">1</span>, X[:, <span class="number">1</span>].max() + <span class="number">1</span>    </span><br><span class="line">    xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),                           </span><br><span class="line">                           np.arange(x2_min, x2_max, resolution))    </span><br><span class="line">    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)    </span><br><span class="line">    Z = Z.reshape(xx1.shape)    </span><br><span class="line">    plt.contourf(xx1, xx2, Z, alpha=<span class="number">0.3</span>, cmap=cmap)    </span><br><span class="line">    plt.xlim(xx1.min(), xx1.max())    </span><br><span class="line">    plt.ylim(xx2.min(), xx2.max())</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># plot class samples    </span></span><br><span class="line">    <span class="keyword">for</span> idx, cl <span class="keyword">in</span> enumerate(np.unique(y)):        </span><br><span class="line">        plt.scatter(x=X[y == cl, <span class="number">0</span>],                    </span><br><span class="line">                    y=X[y == cl, <span class="number">1</span>],                    </span><br><span class="line">                    alpha=<span class="number">0.8</span>,                    </span><br><span class="line">                    c=colors[idx],                    </span><br><span class="line">                    marker=markers[idx],                    </span><br><span class="line">                    label=cl,                    </span><br><span class="line">                    edgecolor=<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line">plot_decision_regions(X, y, classifier=ppn)</span><br><span class="line">plt.xlabel(<span class="string">'sepal length [cm]'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'petal length [cm]'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">'upper left'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://i2.tiimg.com/700703/15a977e327e47b82.png" alt="Markdown"></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 572108581@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>python机器学习--感知机</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">542</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-10-03, 16:56:21</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-03, 17:15:42</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/03/ganzhiji/" title="python机器学习--感知机">https://zhongshanhao.github.io/2019/10/03/ganzhiji/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '6f3e0d2a289a547bed17',
+            clientSecret: 'cbf9a7de3e0e6f814568814a9696bb186d7009f2',
+            repo: 'zhongshanhao.github.io',
+            owner: 'zhongshanhao',
+            admin: ['zhongshanhao'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" href="javascript:void(0)"></a>
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#numpy','#其他',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+    .post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
+    
+</style>
+
+
+
+
+
+
+
+</html>

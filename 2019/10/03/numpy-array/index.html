@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>写在博客之前 | WuMing</title>
-  <meta name="keywords" content=" 其他 ">
-  <meta name="description" content="写在博客之前 | WuMing">
+  <title>numpy_矩阵切片 | WuMing</title>
+  <meta name="keywords" content=" numpy ">
+  <meta name="description" content="numpy_矩阵切片 | WuMing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 <meta property="og:type" content="website">
@@ -251,38 +251,36 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-whyblog" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-numpy-array" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">写在博客之前</h1>
+        <h1 class="article-title">numpy_矩阵切片</h1>
     
     <div class="article-meta">
-        
-        <span class="top"><a href="javascript:">置顶</a></span>
         
         
         
         <span class="book">
             
-                <a href="javascript:" data-rel="杂谈">杂谈</a>
+                <a href="javascript:" data-rel="numpy">numpy</a>
             
         </span>
         
         
         <span class="tag">
             
-            <a href="javascript:" class="color3">其他</a>
+            <a href="javascript:" class="color1">numpy</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-02 15:56:14'>2019-10-02 15:51</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-03 17:19:48'>2019-10-03 15:55</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:140</span>
+        <span>字数:368</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -312,7 +310,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Blog？"><span class="toc-text">Why Blog？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工匠精神"><span class="toc-text">工匠精神</span></a></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -328,14 +326,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Why-Blog？"><a href="#Why-Blog？" class="headerlink" title="Why Blog？"></a>Why Blog？</h2><blockquote>
-<p>记录日常学习笔记。</p>
-<p>方便快速复习已经学过的知识。</p>
-<p>增加写文能力。</p>
-<p>希望能帮助到其他人。</p>
-</blockquote>
-<h2 id="工匠精神"><a href="#工匠精神" class="headerlink" title="工匠精神"></a>工匠精神</h2><p>当今社会，经济和技术高速发展，身处于这样一个时代的我们难免有些浮躁。我所推崇的”工匠精神“，是一种刻骨钻研、追求创新的精神。我所希望的是，任何一种职业，不管在学习还是工作中，都应该像一名工匠一样，尽自己所能把事情做好，做精。</p>
+        <p>和python列表一样，numpy库中array也有着可切片的特性，这大大方便了我们对矩阵的可操作性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">12</span>)</span><br><span class="line">a.shape = (<span class="number">3</span>,<span class="number">4</span>)   <span class="comment">#同写法a = a.reshape(3,4)</span></span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
 
+<p>首先我们现创建一个3*4的矩阵，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[ 0  1  2  3]</span><br><span class="line"> [ 4  5  6  7]</span><br><span class="line"> [ 8  9 10 11]]</span><br></pre></td></tr></table></figure>
+
+<p>可通过a[x,y]选择第x+1行第y+1列的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a[<span class="number">2</span>,<span class="number">3</span>]) <span class="comment">#选择矩阵第3行第4列</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">11</span><br></pre></td></tr></table></figure>
+
+<p>通过以下方法可对矩阵进行切割。</p>
+<p>a[:,y]中“：”表示选择所有行，y表示选择第y+1列，a[:,1]表示选择矩阵a第2列的所有行，也就是[1 5 9]；</p>
+<p>a[1,:]表示选择矩阵a第2行的所有列，也就是[4 5 6 7]。</p>
+<p>a[:,:2]表示选择矩阵a第1和第2列的所有行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(a[:,<span class="number">1</span>])  <span class="comment">#选择矩阵第二列 </span></span><br><span class="line">print(a[<span class="number">1</span>,:])  <span class="comment">#选择矩阵第二行  </span></span><br><span class="line">print(a[:,:<span class="number">2</span>]) <span class="comment">#选择矩阵第一和第二列</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[1 5 9]</span><br><span class="line">[4 5 6 7]</span><br><span class="line">[[0 1]</span><br><span class="line"> [4 5]</span><br><span class="line"> [8 9]]</span><br></pre></td></tr></table></figure>
+
+<p>选择矩阵第2，3行和第2，3列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a[1:,1:3])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[[ 5  6]</span><br><span class="line"> [ 9 10]]</span><br></pre></td></tr></table></figure>
+
+<p>用ravel()方法可将矩阵按行展开</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(a.ravel())<span class="comment">#将矩阵转换成列表</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ 0  1  2  3  4  5  6  7  8  9 10 11]</span><br></pre></td></tr></table></figure>
+
+<p>方法np.where(condition,x1,x2)，矩阵元素满足condition则选择用x1替换，否则用x2替换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="string">'one'</span>,<span class="string">'zreo'</span>,<span class="string">'one'</span>])</span><br><span class="line">y = np.where(y == <span class="string">'one'</span>,<span class="number">1</span>,<span class="number">0</span>) <span class="comment">#满足条件选1，不满足选0</span></span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1 0 1]</span><br></pre></td></tr></table></figure>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 572108581@qq.com </span>
     </div>
@@ -344,12 +367,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>写在博客之前</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">140</span></p>
+    <p><span class="copy-title">文章标题:</span>numpy_矩阵切片</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">368</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-10-02, 15:51:27</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-02, 15:56:14</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/02/whyblog/" title="写在博客之前">https://zhongshanhao.github.io/2019/10/02/whyblog/</a>
+    <p><span class="copy-title">发布时间:</span>2019-10-03, 15:55:37</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-03, 17:19:48</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/03/numpy-array/" title="numpy_矩阵切片">https://zhongshanhao.github.io/2019/10/03/numpy-array/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>

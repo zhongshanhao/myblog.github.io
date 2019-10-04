@@ -23,7 +23,7 @@
 
 <link href="/css/style.css?v=1.0.1" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+<link href="/css/hl_theme/github.css?v=1.0.1" rel="stylesheet">
 
 <link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -127,7 +127,23 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(1)</small></div></li>
+    <li><div class="all active">全部文章<small>(3)</small></div></li>
+    
+        
+            
+            <li><div data-rel="机器学习">机器学习<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="numpy">numpy<small>(1)</small></div>
+                
+            </li>
+            
+        
     
         
             
@@ -147,8 +163,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="1">
-<input type="hidden" id="yelog_site_word_count" value="140">
+<input type="hidden" id="yelog_site_posts_number" value="3">
+<input type="hidden" id="yelog_site_word_count" value="1.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -182,6 +198,10 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
+        <a href="javascript:" class="color1">numpy</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">其他</a>
     </li>
     
@@ -201,6 +221,22 @@
            data-author="" >
             <span class="post-title" title="写在博客之前">写在博客之前</span>
             <span class="post-date" title="2019-10-02 15:51:27">2019/10/02</span>
+        </a>
+        
+        <a  class="机器学习 "
+           href="/2019/10/03/ganzhiji/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="python机器学习--感知机">python机器学习--感知机</span>
+            <span class="post-date" title="2019-10-03 16:56:21">2019/10/03</span>
+        </a>
+        
+        <a  class="numpy "
+           href="/2019/10/03/numpy-array/"
+           data-tag="numpy"
+           data-author="" >
+            <span class="post-title" title="numpy_矩阵切片">numpy_矩阵切片</span>
+            <span class="post-date" title="2019-10-03 15:55:37">2019/10/03</span>
         </a>
         
     </nav>
@@ -346,7 +382,7 @@
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#其他',],
+            'data': ['#numpy','#其他',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
@@ -420,7 +456,7 @@
         border-right: 1px solid #C3CCD0;
         text-align: right;
         color: #AAA;
-        background-color: #fafafa;
+        background-color: ;
     }
     .pre-numbering.widther {
         width: 35px;
@@ -496,24 +532,6 @@
 
     /*列表样式*/
     
-    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
-        border: #e2dede solid 1px;
-        border-radius: 10px;
-        padding: 10px 32px 10px 56px;
-    }
-    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
-        margin-bottom: auto;
-        margin-left: auto;
-    }
-    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
-        margin-bottom: auto;
-        margin-left: auto;
-    }
-    
 
     /* 背景图样式 */
     
@@ -526,6 +544,16 @@
     /*文章列表背景图*/
     
 
+    
+    .post .pjax article :not(pre) > code {
+        color: #24292e;
+        font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+        background-color: rgba(27,31,35,.05);
+        border-radius: 3px;
+        font-size: 85%;
+        margin: 0;
+        padding: .2em .4em;
+    }
     
 </style>
 
