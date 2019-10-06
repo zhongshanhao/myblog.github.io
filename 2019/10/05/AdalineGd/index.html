@@ -127,11 +127,11 @@
 
 
 <ul>
-    <li><div class="all active">全部文章<small>(5)</small></div></li>
+    <li><div class="all active">全部文章<small>(6)</small></div></li>
     
         
             
-            <li><div data-rel="机器学习">机器学习<small>(2)</small></div>
+            <li><div data-rel="机器学习">机器学习<small>(3)</small></div>
                 
             </li>
             
@@ -139,7 +139,7 @@
     
         
             
-            <li><div data-rel="numpy">numpy<small>(1)</small></div>
+            <li><div data-rel="工具">工具<small>(2)</small></div>
                 
             </li>
             
@@ -163,8 +163,8 @@
     </div>
     <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="5">
-<input type="hidden" id="yelog_site_word_count" value="3k">
+<input type="hidden" id="yelog_site_posts_number" value="6">
+<input type="hidden" id="yelog_site_word_count" value="3.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -198,10 +198,6 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a href="javascript:" class="color1">numpy</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a href="javascript:" class="color3">其他</a>
     </li>
     
@@ -223,7 +219,15 @@
             <span class="post-date" title="2019-10-02 15:51:27">2019/10/02</span>
         </a>
         
-        <a  class=""
+        <a  class="工具 "
+           href="/2019/10/06/git-command/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="git常用命令">git常用命令</span>
+            <span class="post-date" title="2019-10-06 21:09:59">2019/10/06</span>
+        </a>
+        
+        <a  class="机器学习 "
            href="/2019/10/05/AdalineGd/"
            data-tag=""
            data-author="" >
@@ -239,9 +243,9 @@
             <span class="post-date" title="2019-10-03 16:56:21">2019/10/03</span>
         </a>
         
-        <a  class="numpy "
+        <a  class="工具 "
            href="/2019/10/03/numpy-array/"
-           data-tag="numpy"
+           data-tag=""
            data-author="" >
             <span class="post-title" title="numpy_矩阵切片">numpy_矩阵切片</span>
             <span class="post-date" title="2019-10-03 15:55:37">2019/10/03</span>
@@ -275,16 +279,22 @@
         
         
         
+        <span class="book">
+            
+                <a href="javascript:" data-rel="机器学习">机器学习</a>
+            
+        </span>
+        
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-05 22:46:03'>2019-10-05 22:44</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-06 20:22:58'>2019-10-05 22:44</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:845</span>
+        <span>字数:1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -314,7 +324,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法初步"><span class="toc-text">算法初步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -330,7 +340,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>定义类AdalineGD封装分类算法，调用fit方法拟合数据，训练模型；调用predict方法测试模型，返回分类类标（1，-1）。</p>
+        <h2 id="算法初步"><a href="#算法初步" class="headerlink" title="算法初步"></a>算法初步</h2><p>Adaline可以看作是对感知器算法的优化和改进，Adaline算法定义了最小化连续性代价函数的概念，这为理解如逻辑回归、支持向量机和回归模型等更高级的机器学习算法奠定了基础。</p>
+<p>定义代价函数：<br>$$<br>J(w) = \frac{1}{2}\sum_{i=1}^{m}(y^{(i)}-h_w(x^{(i)}))^2<br>\\ h_w(x) = w^Tx<br>$$<br>我们要优化目标函数$h_w(x)$，使得输出值符合实际值，就要尽可能降低代价函数$J(w)$,找到使得代价函数最小的w。</p>
+<p>利用梯度下降求最优解：<br>$$<br>w_j:=w_j-\Delta w_j \<br> \Delta w_j = \eta \frac{\delta J}{\delta w_j}=\eta \sum_{i=1}^{m}(h_w(x^{(i)})-y^{(i)})x_j^{(i)}<br>$$</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>定义类AdalineGD封装分类算法，调用fit方法拟合数据，训练模型；调用predict方法测试模型，返回分类类标（1，-1）。</p>
 <p>定义plot_decision_regions类，将分类结果可视化。</p>
 <pre><code class="python">import numpy as np
 import pandas as pd
@@ -449,10 +462,10 @@ plt.show()</code></pre>
 
 <div class="article_copyright">
     <p><span class="copy-title">文章标题:</span>python机器学习分类算法--自适应线性神经网络（Adaline）</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">845</span></p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1k</span></p>
     <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
     <p><span class="copy-title">发布时间:</span>2019-10-05, 22:44:13</p>
-    <p><span class="copy-title">最后更新:</span>2019-10-05, 22:46:03</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-06, 20:22:58</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/05/AdalineGd/" title="python机器学习分类算法--自适应线性神经网络（Adaline）">https://zhongshanhao.github.io/2019/10/05/AdalineGd/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -557,7 +570,7 @@ plt.show()</code></pre>
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#numpy','#其他',],
+            'data': ['#其他',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
