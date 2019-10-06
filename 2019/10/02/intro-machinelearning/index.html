@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>WuMing</title>
+  <title>机器学习概述 | WuMing</title>
   <meta name="keywords" content>
-  <meta name="description" content="WuMing">
+  <meta name="description" content="机器学习概述 | WuMing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/touxiang.jpg" />
@@ -265,12 +265,62 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-intro-machinelearning" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于本站"><span class="toc-text">关于本站</span></a></li></ol>
+        <h1 class="article-title">机器学习概述</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="机器学习">机器学习</a>
+            
+        </span>
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2019-10-05 22:43:33'>2019-10-02 22:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:525</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#机器学习"><span class="toc-text">机器学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习的三种方法"><span class="toc-text">机器学习的三种方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择不同的算法训练模型"><span class="toc-text">选择不同的算法训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#机器学习技能树"><span class="toc-text">机器学习技能树</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -283,12 +333,47 @@
     }
 </style>
 </div>
-            <h2 id="关于本站"><a href="#关于本站" class="headerlink" title="关于本站"></a>关于本站</h2><p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><p>近年来，NumPy、matplotlib和pandas等多种功能强大的开源库的出现，以及利用深度学习框架tensorflow等，使得机器学习这一领域绽放了无限的生机。</p>
+<h3 id="机器学习的三种方法"><a href="#机器学习的三种方法" class="headerlink" title="机器学习的三种方法"></a>机器学习的三种方法</h3><ol>
+<li><p>监督学习(supervised learning)</p>
+<p>监督学习处理的问题分为两种，一是分类问题（classification），根据已经标记有是否为垃圾邮件的样本库，判断一封新邮件是否为垃圾邮件的问题。二是回归问题（regression），如我们想预测学生在SAT考试中数学科目的成绩，根据往期学生成绩与学习时间建立训练模型，通过学习时间预测学生的数学成绩。</p>
+<p>监督学习是根据已有的样本训练模型，然后对未知的样本进行预测的一种方法。</p>
+</li>
+<li><p>非监督学习(unsupervised learning)</p>
+<p>无监督学习是在没有已知输出变量和反馈函数指导的情况下提取有效信息来探索数据的整体结构的。通过非监督学习能够发现数据本身潜在的结构，在数据压缩中的降维邻域非监督学习也发挥着重要作用。</p>
+</li>
+<li><p>强化学习(reinforcement learning)</p>
+<p>强化学习构建一个系统，在与环境的交互的过程中提高系统的性能。一个强化学习的经典例子就是象棋对弈游戏，系统根据当前局态（环境）决定落子的位置，游戏结束时胜负的判定可以作为反馈，通过这个反馈让系统做出调整，优化系统，提升系统的性能。</p>
+</li>
+</ol>
+<h3 id="选择不同的算法训练模型"><a href="#选择不同的算法训练模型" class="headerlink" title="选择不同的算法训练模型"></a>选择不同的算法训练模型</h3><p>任何分类算法都有内在的局限性，在实际解决问题的过程中， 应该选用几种不同的算法来训练模型，并比较它们的性能，从中选择最优的一个。一个常用的性能指标是分类的准确性。</p>
+<h3 id="机器学习技能树"><a href="#机器学习技能树" class="headerlink" title="机器学习技能树"></a>机器学习技能树</h3><p><img src="http://i1.fuimg.com/700703/cf43e5cf096624cd.png" alt="机器学习技能图谱"></p>
+<p>图谱从<a href="https://github.com/TeamStuQ/skill-map转载" target="_blank" rel="noopener">https://github.com/TeamStuQ/skill-map转载</a></p>
 
-        </article>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 572108581@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>机器学习概述</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">525</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-10-02, 22:42:10</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-05, 22:43:33</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/02/intro-machinelearning/" title="机器学习概述">https://zhongshanhao.github.io/2019/10/02/intro-machinelearning/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -308,6 +393,53 @@
         gitalk.render('comments')
     })
 </script>
+
+
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
 
 
     </div>
