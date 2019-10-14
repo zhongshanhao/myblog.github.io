@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>关于 | WuMing</title>
+  <title>python机器学习-数据预处理 | WuMing</title>
   <meta name="keywords" content>
-  <meta name="description" content="关于 | WuMing">
+  <meta name="description" content="python机器学习-数据预处理 | WuMing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 <meta property="og:type" content="website">
@@ -279,24 +279,30 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-data-preprocessing" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">关于</h1>
+        <h1 class="article-title">python机器学习-数据预处理</h1>
     
     <div class="article-meta">
         
         
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="机器学习">机器学习</a>
+            
+        </span>
         
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-02 14:15:00'>2019-10-02 10:51</time>
+        创建时间:<time class="date" title='更新时间: 2019-10-14 20:13:41'>2019-10-10 20:12</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:16</span>
+        <span>字数:1.4k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -326,7 +332,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据预处理"><span class="toc-text">数据预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#处理非数值型数据"><span class="toc-text">处理非数值型数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#划分数据集为训练集和测试集"><span class="toc-text">划分数据集为训练集和测试集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据正则化"><span class="toc-text">数据正则化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特征的选择"><span class="toc-text">特征的选择</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -342,8 +348,307 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>个人：无名。</p>
-<p>座右铭：冰冻三尺，非一日之寒。</p>
+        <h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><h3 id="处理非数值型数据"><a href="#处理非数值型数据" class="headerlink" title="处理非数值型数据"></a>处理非数值型数据</h3><pre><code class="python">import pandas as pd  
+
+df = pd.DataFrame([ 
+                    [&#39;green&#39;, &#39;M&#39;, 10.1, &#39;class1&#39;], 
+                    [&#39;red&#39;, &#39;L&#39;, 13.5, &#39;class2&#39;], 
+                    [&#39;blue&#39;, &#39;XL&#39;, 15.3, &#39;class1&#39;]]) 
+df.columns = [&#39;color&#39;, &#39;size&#39;, &#39;price&#39;, &#39;classlabel&#39;] 
+print(df)</code></pre>
+<pre><code>   color size  price classlabel
+0  green    M   10.1     class1
+1    red    L   13.5     class2
+2   blue   XL   15.3     class1</code></pre><p>利用pandas将CSV格式的数据读取进来，要将字符串转换为适合机器学习算法训练的数据类型。<br>先对特征size数据进行处理，由于XL&gt;L&gt;M，size特征有这样的一个顺序特征，所以将这类字符串转换为数值时也该保留顺序特征。利用映射函数map很容易将字符串转换：</p>
+<pre><code class="python">size_mapping = {                  
+                &#39;XL&#39;: 3,                  
+                &#39;L&#39;: 2,                
+                &#39;M&#39;: 1} 
+df[&#39;size&#39;] = df[&#39;size&#39;].map(size_mapping) 
+print(df)</code></pre>
+<pre><code>   color  size  price classlabel
+0  green     1   10.1     class1
+1    red     2   13.5     class2
+2   blue     3   15.3     class1</code></pre><p>可以利用小技巧将数值数据转换回字符串：</p>
+<pre><code class="python">inv_size_mapping = {v: k for k, v in size_mapping.items()}
+print(df[&#39;size&#39;].map(inv_size_mapping) )</code></pre>
+<pre><code>0     M
+1     L
+2    XL
+Name: size, dtype: object</code></pre><p>对于分类标签classlabe，只需要将字符串转换为数值特征就好。<br>利用枚举函数enumerate()和np.unique()将标签导出为映射字典，在用映射函数map将分类标签转换为整数：</p>
+<pre><code class="python">import numpy as np
+class_mapping = {label:idx for idx,label in                 
+                 enumerate(np.unique(df[&#39;classlabel&#39;]))}
+df[&#39;classlabel&#39;] = df[&#39;classlabel&#39;].map(class_mapping) 
+print(df)</code></pre>
+<pre><code>   color  size  price  classlabel
+0  green     1   10.1           0
+1    red     2   13.5           1
+2   blue     3   15.3           0</code></pre><p>同样将整数值可以反映射回分类标签：</p>
+<pre><code class="python">inv_class_mapping = {v: k for k, v in class_mapping.items()}
+df[&#39;classlabel&#39;] = df[&#39;classlabel&#39;].map(inv_class_mapping) 
+print(df)</code></pre>
+<pre><code>   color  size  price classlabel
+0  green     1   10.1     class1
+1    red     2   13.5     class2
+2   blue     3   15.3     class1</code></pre><p>也可直接调用sklearn库LabelEncoder类实现：</p>
+<pre><code class="python">from sklearn.preprocessing import LabelEncoder 
+
+class_le = LabelEncoder() 
+y = class_le.fit_transform(df[&#39;classlabel&#39;].values) 
+print(y)</code></pre>
+<pre><code>[0 1 0]</code></pre><pre><code class="python">class_le.inverse_transform(y)</code></pre>
+<pre><code>array([&#39;class1&#39;, &#39;class2&#39;, &#39;class1&#39;], dtype=object)</code></pre><p>接下来考虑特征color，颜色green，red，blue没有顺序特征，可以采用热编码的方式将其转换，调用pandas中的get_dummies方法转换字符串：</p>
+<pre><code class="python">pd.get_dummies(df[[&#39;price&#39;, &#39;color&#39;, &#39;size&#39;]])</code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>price</th>
+      <th>size</th>
+      <th>color_blue</th>
+      <th>color_green</th>
+      <th>color_red</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>10.1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>13.5</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>15.3</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<h3 id="划分数据集为训练集和测试集"><a href="#划分数据集为训练集和测试集" class="headerlink" title="划分数据集为训练集和测试集"></a>划分数据集为训练集和测试集</h3><pre><code class="python">import pandas as pd
+import numpy as np
+
+df_wine = pd.read_csv(&#39;https://archive.ics.uci.edu/&#39;                          
+                       &#39;ml/machine-learning-databases/&#39;                          
+                       &#39;wine/wine.data&#39;, header=None) 
+df_wine.columns = [&#39;Class label&#39;, &#39;Alcohol&#39;,                  
+                       &#39;Malic acid&#39;, &#39;Ash&#39;,                
+                       &#39;Alcalinity of ash&#39;, &#39;Magnesium&#39;,                 
+                       &#39;Total phenols&#39;, &#39;Flavanoids&#39;,                    
+                       &#39;Nonflavanoid phenols&#39;,                    
+                       &#39;Proanthocyanins&#39;,                     
+                       &#39;Color intensity&#39;, &#39;Hue&#39;,                     
+                       &#39;OD280/OD315 of diluted wines&#39;,                     
+                       &#39;Proline&#39;]  
+print(&#39;Class labels&#39;, np.unique(df_wine[&#39;Class label&#39;])) 
+df_wine.head()</code></pre>
+<pre><code>Class labels [1 2 3]</code></pre><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style><p></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Class label</th>
+      <th>Alcohol</th>
+      <th>Malic acid</th>
+      <th>Ash</th>
+      <th>Alcalinity of ash</th>
+      <th>Magnesium</th>
+      <th>Total phenols</th>
+      <th>Flavanoids</th>
+      <th>Nonflavanoid phenols</th>
+      <th>Proanthocyanins</th>
+      <th>Color intensity</th>
+      <th>Hue</th>
+      <th>OD280/OD315 of diluted wines</th>
+      <th>Proline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>14.23</td>
+      <td>1.71</td>
+      <td>2.43</td>
+      <td>15.6</td>
+      <td>127</td>
+      <td>2.80</td>
+      <td>3.06</td>
+      <td>0.28</td>
+      <td>2.29</td>
+      <td>5.64</td>
+      <td>1.04</td>
+      <td>3.92</td>
+      <td>1065</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>13.20</td>
+      <td>1.78</td>
+      <td>2.14</td>
+      <td>11.2</td>
+      <td>100</td>
+      <td>2.65</td>
+      <td>2.76</td>
+      <td>0.26</td>
+      <td>1.28</td>
+      <td>4.38</td>
+      <td>1.05</td>
+      <td>3.40</td>
+      <td>1050</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1</td>
+      <td>13.16</td>
+      <td>2.36</td>
+      <td>2.67</td>
+      <td>18.6</td>
+      <td>101</td>
+      <td>2.80</td>
+      <td>3.24</td>
+      <td>0.30</td>
+      <td>2.81</td>
+      <td>5.68</td>
+      <td>1.03</td>
+      <td>3.17</td>
+      <td>1185</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>1</td>
+      <td>14.37</td>
+      <td>1.95</td>
+      <td>2.50</td>
+      <td>16.8</td>
+      <td>113</td>
+      <td>3.85</td>
+      <td>3.49</td>
+      <td>0.24</td>
+      <td>2.18</td>
+      <td>7.80</td>
+      <td>0.86</td>
+      <td>3.45</td>
+      <td>1480</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>1</td>
+      <td>13.24</td>
+      <td>2.59</td>
+      <td>2.87</td>
+      <td>21.0</td>
+      <td>118</td>
+      <td>2.80</td>
+      <td>2.69</td>
+      <td>0.39</td>
+      <td>1.82</td>
+      <td>4.32</td>
+      <td>1.04</td>
+      <td>2.93</td>
+      <td>735</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<p>首先将数据读取，调用train_test_split函数将数据集划分，参数test_size=0.3表示将数据集的30%<br>划分给测试集，把70%划分给训练集，stratify=y表示训练集中各个类别的比例和测试集中一样。</p>
+<pre><code class="python">from sklearn.model_selection import train_test_split 
+
+X, y = df_wine.iloc[:, 1:].values, df_wine.iloc[:, 0].values 
+X_train, X_test, y_train, y_test =train_test_split(X, y,                      
+                                             test_size=0.3,                      
+                                             random_state=0,                     
+                                             stratify=y)</code></pre>
+<h3 id="数据正则化"><a href="#数据正则化" class="headerlink" title="数据正则化"></a>数据正则化</h3><p>数据正则化对线性模型和梯度下降等优化算法特别有用。但基于树的模型不需要进行标准化。<br>创建StandardScaler对象，调用fit方法获取样本均值和标准差，再用这些参数去转换测试集。</p>
+<pre><code class="python">from sklearn.preprocessing import StandardScaler 
+
+sc = StandardScaler() 
+sc.fit(X_train) 
+X_train_std = sc.transform(X_train)
+X_test_std = sc.transform(X_test) </code></pre>
+<h3 id="特征的选择"><a href="#特征的选择" class="headerlink" title="特征的选择"></a>特征的选择</h3><p>L1正则化：</p>
+<pre><code class="python">import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+
+fig = plt.figure() 
+ax = plt.subplot(111)
+colors = [&#39;blue&#39;, &#39;green&#39;, &#39;red&#39;, &#39;cyan&#39;, 
+          &#39;magenta&#39;, &#39;yellow&#39;, &#39;black&#39;, 
+          &#39;pink&#39;, &#39;lightgreen&#39;, &#39;lightblue&#39;, 
+          &#39;gray&#39;, &#39;indigo&#39;, &#39;orange&#39;] 
+weights, params = [], []
+for c in np.arange(-4., 6.): 
+    lr = LogisticRegression(penalty=&#39;l1&#39;, 
+                            C=10.**c, 
+                            random_state=0,solver=&#39;liblinear&#39;,multi_class=&#39;ovr&#39;) 
+    lr.fit(X_train_std, y_train)
+    weights.append(lr.coef_[1])
+    params.append(10**c)
+weights = np.array(weights)
+for column, color in zip(range(weights.shape[1]), colors):
+    plt.plot(params, weights[:, column],
+             label=df_wine.columns[column + 1],
+             color=color) 
+plt.axhline(0, color=&#39;black&#39;, linestyle=&#39;--&#39;, linewidth=3)
+plt.xlim([10**(-5), 10**5])
+plt.ylabel(&#39;weight coefficient&#39;)
+plt.xlabel(&#39;C&#39;) 
+plt.xscale(&#39;log&#39;)
+plt.legend(loc=&#39;upper left&#39;)
+ax.legend(loc=&#39;upper center&#39;,
+          bbox_to_anchor=(1.38, 1.03),
+          ncol=1, fancybox=True)
+plt.show() </code></pre>
+<p><img src="http://i1.fuimg.com/700703/62a07faa3d644d63.png" alt="Markdown"></p>
+<p>参数C是正则化参数的逆，参数C越小，模型的正则化强度就越强，上述采用L1正则化，可以看到，当C极小的时候，各个特征的权值都趋近于0，然而，当C越大时，有些特征的权重依然徘徊在0附近，这说明对于该分类模型来说，这些特征对于分类的作用没有那么明显，所以，我们可以在训练模型的时候将这些模型去掉，以简化分类模型，减少泛化误差。可以说，L1正则化是一种特征选择技术。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 572108581@qq.com </span>
@@ -351,6 +656,18 @@
 </article>
 
 
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>python机器学习-数据预处理</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.4k</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="WuMing">WuMing</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-10-10, 20:12:47</p>
+    <p><span class="copy-title">最后更新:</span>2019-10-14, 20:13:41</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/10/10/data-preprocessing/" title="python机器学习-数据预处理">https://zhongshanhao.github.io/2019/10/10/data-preprocessing/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
 
 
 
