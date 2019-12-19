@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>关于 | ZSH</title>
+  <title>多线程 | ZSH</title>
   <meta name="keywords" content>
-  <meta name="description" content="关于 | ZSH">
+  <meta name="description" content="多线程 | ZSH">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="个人：无名。 座右铭：冰冻三尺，非一日之寒。">
 <meta property="og:type" content="website">
@@ -303,24 +303,30 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-multiThread" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">关于</h1>
+        <h1 class="article-title">多线程</h1>
     
     <div class="article-meta">
         
         
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="Java">Java</a>
+            
+        </span>
         
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-10-02 14:15:00'>2019-10-02 10:51</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-19 19:07:30'>2019-11-17 15:51</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:16</span>
+        <span>字数:1.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -350,7 +356,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进程与线程"><span class="toc-text">进程与线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程"><span class="toc-text">进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程"><span class="toc-text">线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程生命周期"><span class="toc-text">线程生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#新建"><span class="toc-text">新建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#就绪"><span class="toc-text">就绪</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#运行"><span class="toc-text">运行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#阻塞"><span class="toc-text">阻塞</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#死亡"><span class="toc-text">死亡</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程安全"><span class="toc-text">线程安全</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的同步方法"><span class="toc-text">线程的同步方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#死锁"><span class="toc-text">死锁</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁产生的必要条件"><span class="toc-text">死锁产生的必要条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁避免"><span class="toc-text">死锁避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁检测"><span class="toc-text">死锁检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#死锁恢复"><span class="toc-text">死锁恢复</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程特性"><span class="toc-text">多线程特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程控制类"><span class="toc-text">多线程控制类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ThreadLocal"><span class="toc-text">ThreadLocal</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -366,8 +372,120 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>个人：无名。</p>
-<p>座右铭：冰冻三尺，非一日之寒。</p>
+        <h2 id><a href="#" class="headerlink" title></a><!-- 多线程 --></h2><h3 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h3><h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><p>是什么？</p>
+<p>在linux是用命令<code>ps aux</code>可以查看正在运行的进程</p>
+<p><img src="https://i.postimg.cc/W1pwk5Y1/linux.png" alt="linux下的进程"></p>
+<p>进程是程序的一次执行过程。在Java中，每次程序运行至少启动两个线程，一个main线程，一个是垃圾收集进程。在比如打开一个浏览器时，系统会创建一个进程，打开一个新的标签页相当于创建了一个线程，一个进程可以拥有多个线程。</p>
+<h4 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h4><p>是什么？</p>
+<p>线程是比进程更小的执行单位，一个进程包含多个线程，线程处理细小的任务，线程被称为是轻量级的线程。</p>
+<h4 id="线程生命周期"><a href="#线程生命周期" class="headerlink" title="线程生命周期"></a>线程生命周期</h4><p><img src="https://i.postimg.cc/Z5fFF6XF/image.png" alt="线程生命周期"></p>
+<h5 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h5><p>new关键字创建了一个线程之后，线程就处于新建状态，</p>
+<p>jvm为线程分配内存，初始化成员变量值。</p>
+<h5 id="就绪"><a href="#就绪" class="headerlink" title="就绪"></a>就绪</h5><p> 当线程对象调用了start() 方法之后，该线程就处于就绪状态，就绪态的线程只缺少处理器资源就可以运行了；</p>
+<p>jvm为线程创建方法栈和程序技术器，等待线程调度器调度。</p>
+<h5 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h5><p>就绪态的线程获得cpu资源，开始运行run()，此时线程进入运行状态。</p>
+<h5 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h5><p>线程可以主动或被动放弃cpu资源，进入阻塞状态</p>
+<ul>
+<li>线程调用sleep()主动放弃cpu</li>
+<li>线程等待io</li>
+<li>线程尝试获得一个同步锁，但是该同步锁被其他线程所占用</li>
+<li>线程在等待某个通知(notify)</li>
+<li>程序调用了线程的suspend()方法将线程挂起。该方法容易导致死锁。</li>
+</ul>
+<h5 id="死亡"><a href="#死亡" class="headerlink" title="死亡"></a>死亡</h5><p>线程可能有以下3种方式死亡</p>
+<ul>
+<li>run()或call()方法执行完成，线程正常结束。</li>
+<li>线程执行出错，抛出异常</li>
+<li>调用stop()方法结束线程，该方法容易产生死锁。</li>
+</ul>
+<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><p>若一个程序使用了多个线程，它每次的运行结果和只使用单线程的结果是一样的，那么就称为线程安全的。若一个程序中对同一个变量有读和写两个线程，因为我们不知道这两个线程的执行顺序，先执行读和先执行写的两个进程读出来的结果是不一样的，这就是线程不安全。</p>
+<p>例子：多个窗口进行售票，在程序中一个窗口绑定一个线程运行，若没有适当的线程同步措施，可能会造成一张票被售出多次的情况。</p>
+<h4 id="线程的同步方法"><a href="#线程的同步方法" class="headerlink" title="线程的同步方法"></a>线程的同步方法</h4><ul>
+<li>同步代码块（synchronized）</li>
+<li>同步方法（synchronized）</li>
+<li>同步锁（ReenreantLock）</li>
+<li>特殊域变量（volatile）</li>
+<li>局部变量（ThreadLocal）</li>
+<li>阻塞队列（LinkedBlockingQueue）</li>
+<li>原子变量（Atomic*）</li>
+</ul>
+<p>同步代码块（synchronized）</p>
+<p>synchronized关键字可以用于方法中的某个区块中，表示只对该区块的资源进行互斥访问。</p>
+<pre><code>synchronized(同步锁){
+    需要同步的代码
+}</code></pre><p>同步锁</p>
+<p>多个线程使用同一把锁，在一个线程拥有同步锁的时候，该线程就可以进入代码块，其他线程只能在外面等着。</p>
+<p>同步方法（synchronized）</p>
+<pre><code>public synchronized void methon(){
+     需要同步的代码
+}</code></pre><p>同步锁（ReenreantLock）</p>
+<pre><code>public void lock();            // 开启同步锁
+public void unlock();   // 释放同步锁
+
+try{
+    lock();
+    ....
+}finally{
+    unlock();
+}</code></pre><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁是多个线程互相抢占资源的造成的一种僵局，导致线程之间相互等待，若没有外力作用，线程将永远等待下去。</p>
+<h4 id="死锁产生的必要条件"><a href="#死锁产生的必要条件" class="headerlink" title="死锁产生的必要条件"></a>死锁产生的必要条件</h4><p>若产生死锁，则下面条件必然成立。</p>
+<ul>
+<li>互斥条件，即进程对所分配的进程</li>
+<li>不可剥夺条件</li>
+<li>占有并请求条件</li>
+<li>循环等待条件</li>
+</ul>
+<p>####　死锁预防</p>
+<p>防止死锁产生的四个必要条件成立即可。</p>
+<h4 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h4><ul>
+<li>有序资源分配法</li>
+<li>银行家算法</li>
+<li>顺序加锁</li>
+<li>限时加锁</li>
+</ul>
+<h4 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h4><p>预防和避免死锁系统开销大且不能充分利用资源，更好的方法是不采取任何限制性措施，而是提供检测和解脱死锁的手段，这就是死锁检测和恢复。</p>
+<p>死锁检测数据结构：</p>
+<ul>
+<li>E是现有资源向量（existing resource vector），代码每种已存在资源的总数</li>
+<li>A是可用资源向量（available resource vector），那么Ai表示当前可供使用的资源数（即没有被分配的资源）</li>
+<li>C是当前分配矩阵（current allocation matrix），C的第i行代表Pi当前所持有的每一种类型资源的资源数</li>
+<li>R是请求矩阵（request matrix），R的每一行代表P所需要的资源的数量</li>
+</ul>
+<img src="https://i.postimg.cc/DfbWjsJP/image.png"> 
+
+<p>死锁检测步骤</p>
+<ul>
+<li><p>寻找一个没有结束标记的进程Pi，对于它而言R矩阵的第i行向量小于或等于A。</p>
+</li>
+<li><p>如果找到了这样一个进程，执行该进程，然后将C矩阵的第i行向量加到A中，标记该进程，并转到第1步</p>
+</li>
+<li><p>如果没有这样的进程，那么算法终止</p>
+</li>
+<li><p>算法结束时，所有没有标记过的进程都是死锁进程。</p>
+</li>
+</ul>
+<h4 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h4><ul>
+<li>利用抢占资源恢复，即临时将某个资源从它的当前所属进程转移到另一个进程，相当于破坏了死锁产生的必要条件的不可剥夺条件。</li>
+<li>利用回滚恢复，周期性的将进程的状态进行备份，当发现进程死锁后，根据备份将进程复位到一个更早的，还没有取得所需资源的状态，接着就把这些资源分配给其他进程。</li>
+<li>通过杀死进程恢复，直接将一个或多个进程杀死，相当于破坏了循环等待条件。</li>
+</ul>
+<h3 id="多线程特性"><a href="#多线程特性" class="headerlink" title="多线程特性"></a>多线程特性</h3><p>当线程参与计算时，原始的数据来自内存，在计算过程中，有些数据可能被频繁读取，这些数据被临时存储在寄存器和高速缓存中，当线程完成计算任务后，这些缓存的数据会写回内存。</p>
+<p>当多个线程同时读写某个内存数据时，就会产生多线程并发问题，解决这些问题涉及到多线程编程的三个特性：原子性，有序性，可见性。</p>
+<p>多线程编程应该满足三个特性：原子性，可见性，有序性。</p>
+<p>原子性</p>
+<p>一个或多个操作要么全部执行成功要么就都不执行。</p>
+<p>可见性</p>
+<p>当多个线程访问同一变量时，一个线程修改了这个变量的值，其他线程应该能够立即看到修改的值。</p>
+<p>有序性</p>
+<p>程序的执行顺序按照代码的先后顺序执行。</p>
+<h3 id="多线程控制类"><a href="#多线程控制类" class="headerlink" title="多线程控制类"></a>多线程控制类</h3><p>为了保证多线程的三个特性，Ｊａｖａ引入了很多线程控制机制：</p>
+<ul>
+<li>ThreadLocal</li>
+<li>原子类</li>
+<li>Lock类</li>
+<li>Volatile关键字</li>
+</ul>
+<h4 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h4><p>未完待续～</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 572108581@qq.com </span>
@@ -375,6 +493,18 @@
 </article>
 
 
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>多线程</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.7k</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="ZSH">ZSH</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-11-17, 15:51:27</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-19, 19:07:30</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/11/17/multiThread/" title="多线程">https://zhongshanhao.github.io/2019/11/17/multiThread/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
 
 
 
